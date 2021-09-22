@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dp">
+    
+    <link rel="stylesheet" href="style.css" />
+
+    <title>HooChoo</title>
+
+    <style>
+        .drawingLots{
+            text-align: center;
+        }
+        .drawingLots #drawing{
+            float: bottom;
+            border: solid 3px #ffffff;
+            position: static;
+            width: 80px;
+            text-align: center;
+            margin: auto;
+        }
+        .drawingLots td{
+            border: solid 1px #ffffff;
+            text-align: center;
+            background-color: #fff0ff;
+            width: 80px;
+            font-size: 15px;
+        }
+        .drawingLots input{
+            float: center;
+            border: solid 2px #ffb0ff;
+            text-align: center;
+        }
+        .drawingLots input.newadd{
+            height: 30px;
+            width: 130px;
+        }
+        .drawingLots input.btn{
+            background-color: #ffd0ff;
+            height: 30px;
+            width: 30px;
+        }
+        .drawingLots input.startButton{
+            width: 80px;
+            font-size: 20px;
+            background-color: #ffbfff;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <ul id="nav">
+        <li><a href="index.html">돌림판</a></li>
+        <li><a href="drawingLots.html" class="active">제비뽑기</a></li>
+        <li><a href="other.html">기타</a></li>
+    </ul>
+
+    <div class="drawingLots">
+        <input type="text" id="newadd" class="newadd" />
+        <input type="button" value="+" onclick="addRow()" class="btn" />
+        <input type="button" value="-" onclick="deleteRow(-1)" class="btn" />
+
+        <br /><br />
+
+        <table id="drawing">
+            <tr><td>사과</td></tr>
+            <tr><td>오렌지</td></tr>
+            <tr><td>바나나</td></tr>
+        </table>
+
+        <br />
+
+        <input type="button" value="뽑기!" class="startButton" onclick="td_copy()" />
+    </div>
+
+    <script>
+        function addRow() {
+            // table element 찾기
+            const table = document.getElementById('drawing');
+            // 새 행(Row) 추가
+            const newRow = table.insertRow();
+            // 새 행(Row)에 Cell 추가
+            const newCell1 = newRow.insertCell(0);
+            // Cell에 텍스트 추가
+            newCell1.innerText = document.getElementById('newadd').value;;
+
+            var el = document.getElementsByClassName('newadd');
+
+            for(var i=0; i<el.length; i++){
+
+                el[i].value = '';
+            }
+        }
+
+        function deleteRow(rownum) {
+            // table element 찾기
+            const table = document.getElementById('drawing');
+        
+            // 행(Row) 삭제
+            const newRow = table.deleteRow(rownum);
+        }
+        
+        function td_copy(){
+            var str = []
+            var a = document.getElementsByTagName("td")
+            //td[번호]를 읽어와 안의 값을 str에 저장
+            var n = Math.floor(Math.random()*a.length)
+            var b = document.getElementsByTagName('td')[n].childNodes[0].nodeValue;
+            alert(b)
+        }
+    </script>
+</body>
+</html>
